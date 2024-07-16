@@ -1,37 +1,37 @@
 import { useState } from "react";
 
 export default ({
-  setCreateShipmentModel,
-  createShipmentModel,
-  createShipment,
+  setcreateFarmerCBCModel,
+  createFarmerCBCModel,
+  createFarmerCBC,
 }) => {
-  const [shipment, setShipment] = useState({
-    receiver: "",
-    pickupTime: "",
-    distance: "",
-    price: "",
+  const [farmer, setFarmerCBC] = useState({
+    CBC: "",
+    Name: "",
+    Date_Created: "",
+    location: "",
   });
 
   const createItem = async () => {
     try {
-      await createShipment(shipment);
-      console.log(shipment)
+      await createFarmerCBC(farmer);
+      console.log(farmer)
     } catch (error) {
-      console.log("Wrong creating item");
+      console.log("Wrong creating Farmer");
     }
   };
-  return createShipmentModel ? (
+  return createFarmerCBCModel ? (
     <div className="fixed inset-0 z-10 overflow-y-auto">
       <div
         className="fixed inset-0 w-full h-full bg-black opacity-40"
-        onClick={() => setCreateShipmentModel(true)}
+        onClick={() => setcreateFarmerCBCModel(true)}
       ></div>
       <div className="flex items-center min-h-screen px-4 py-8">
         <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
           <div className="flex justify-end">
             <button
               className="p-2 text-gray-400 rounded-md hover:bg-gray-100"
-              onClick={() => setCreateShipmentModel(true)}
+              onClick={() => setcreateFarmerCBCModel(true)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,9 +59,9 @@ export default ({
                   placeholder="Receiver"
                   className="w-full pl-5 pr-3 py-2 text-gray-700 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                   onChange={(e) =>
-                    setShipment({
-                      ...shipment,
-                      receiver: e.target.value,
+                    setFarmerCBC({
+                      ...farmer,
+                      CBC: e.target.value,
                     })
                   }
                 />
@@ -72,9 +72,9 @@ export default ({
                   placeholder="PickupTime"
                   className="w-full pl-5 pr-3 py-2 text-gray-700 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                   onChange={(e) =>
-                    setShipment({
-                      ...shipment,
-                      pickupTime: e.target.value,
+                    setFarmerCBC({
+                      ...farmer,
+                      Name: e.target.value,
                     })
                   }
                 />
@@ -85,9 +85,9 @@ export default ({
                   placeholder="Distance"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                   onChange={(e) =>
-                    setShipment({
-                      ...shipment,
-                      distance: e.target.value,
+                    setFarmerCBC({
+                      ...farmer,
+                      Date_Created: e.target.value,
                     })
                   }
                 />
@@ -98,9 +98,9 @@ export default ({
                   placeholder="Price"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                   onChange={(e) =>
-                    setShipment({
-                      ...shipment,
-                      price: e.target.value,
+                    setFarmerCBC({
+                      ...farmer,
+                      location: e.target.value,
                     })
                   }
                 />
@@ -110,7 +110,7 @@ export default ({
                 onClick={() => createItem()}
                 className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-[#f59e0b] bg-[#492407] hover:bg-[#341402] active:bg-[#341402] rounded-lg ring-offset-2 ring-gray-600 focus:ring-2"
               >
-                Add Tracking
+                Add Farmer
               </button>
             </form>
           </div>

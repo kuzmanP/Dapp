@@ -2,6 +2,8 @@ import Footer from "./Footer";
 import Table from "./Table";
 import NavBar from "./NavBar";
 import Form from "./Form";
+import FormFarmer from "./FormFarmer";
+import FarmerTable from "./FarmerTable";
 import Services from "./Services";
 import Profile from "./Profile";
 import GetShipment from "./GetShipment";
@@ -21,6 +23,8 @@ export {
     Table,
     NavBar,
     Form,
+    FarmerTable,
+    FormFarmer,
     Services,
     Profile,
     GetShipment,

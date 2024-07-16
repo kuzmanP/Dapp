@@ -4,6 +4,7 @@ import React, {useState, useEffect, useContext} from "react";
 import {
   Table,
   Form,
+  FormFarmer,
   Services,
   Profile,
   CompleteShipment,
@@ -16,6 +17,7 @@ const Index = () => {
   const {
     currentUser,
     createShipment,
+    createFarmerCBC,
     getAllShipment,
     completeShipment,
     getShipment,
@@ -25,6 +27,7 @@ const Index = () => {
 
   //STATE VARIABLE
   const [createShipmentModel, setCreateShipmentModel] = useState(false);
+  const [createFarmerCBCModel, setcreateFarmerCBCModel] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [startModal, setStartModal] = useState(false);
   const [completeModal, setCompleteModal] = useState(false);
@@ -55,6 +58,11 @@ const Index = () => {
         createShipmentModel={createShipmentModel}
         createShipment={createShipment}
         setCreateShipmentModel={setCreateShipmentModel}
+      />
+      <FormFarmer
+        createShipmentModel={createFarmerCBCModel}
+        createFarmerCBC={createFarmerCBC}
+        setcreateFarmerCBCModel={setcreateFarmerCBCModel}
       />
       <Profile
         openProfile={openProfile}

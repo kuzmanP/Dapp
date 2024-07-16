@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
 import { TrackingContext } from "../Conetxt/TrackingContext";
 
-const ShipmentTable = ({ setCreateShipmentModel }) => {
-  const { getallShipmentDB } = useContext(TrackingContext);
-  const [allShipmentsdata, setAllShipmentsdata] = useState([]);
+const FarmerTable = ({ setcreateFarmerCBCModel }) => {
+  const { getallFarmersDB } = useContext(TrackingContext);
+  const [allFarmersdata, setAllFarmersdata] = useState([]);
 
   useEffect(() => {
-    const fetchShipments = async () => {
+    const fetchFarmers = async () => {
       try {
-        const response = await getallShipmentDB();
+        const response = await getallFarmersDB();
         console.log("Shipments fetched:", response); // Debug: log fetched response
         // Check if response has shipments key with an array
-        if (response.shipments && Array.isArray(response.shipments)) {
-          setAllShipmentsdata(response.shipments);
+        if (response.farmers && Array.isArray(response.farmers)) {
+            setAllFarmersdata(response.shipments);
         } else {
           throw new Error("Invalid data format received.");
         }
       } catch (error) {
         console.error("Error fetching shipments:", error);
-        setAllShipmentsdata([]);
+        setAllFarmersdata([]);
       }
     };
 
-    fetchShipments();
-  }, [getallShipmentDB]);
+    fetchFarmers();
+  }, [allFarmersdata]);
 
   const convertTime = (time) => {
     const newTime = new Date(time);
@@ -41,10 +41,10 @@ const ShipmentTable = ({ setCreateShipmentModel }) => {
       <div className="items-start justify-between md:flex">
         <div className="mt-3 md:mt-0 cursor-pointer">
           <p
-            onClick={() => setCreateShipmentModel(true)}
+            onClick={() => setcreateFarmerCBCModel(true)}
             className="inline-block px-4 py-2 text-[#f59e0b] duration-150 font-medium bg-[#422006] hover:bg-[#341402] active:bg-[#341402] md:text-sm rounded-lg md:inline-flex cursor-pointer mb-4"
           >
-            Add Product
+            Add Farmer
           </p>
         </div>
       </div>
@@ -52,40 +52,28 @@ const ShipmentTable = ({ setCreateShipmentModel }) => {
         <table className="w-full table-auto text-sm text-left border-separate border-spacing-y-2">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
-              <th className="py-3 px-6">Receiver</th>
-              <th className="py-3 px-6">Pickup Time</th>
-              <th className="py-3 px-6">Distance</th>
-              <th className="py-3 px-6">Price</th>
-              <th className="py-3 px-6">Paid</th>
-              <th className="py-3 px-6">Status</th>
+              <th className="py-3 px-6">CBC</th>
+              <th className="py-3 px-6">Name</th>
+              <th className="py-3 px-6">Date Added</th>
+              <th className="py-3 px-6">Location</th>
             </tr>
           </thead>
           <tbody className="text-gray-600">
-            {allShipmentsdata.map((shipment) => (
-              <tr key={shipment._id} className="hover:bg-gray-100">
+            {allFarmersdata.map((farmer) => (
+              <tr key={farmer._id} className="hover:bg-gray-100">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="text-gray-900">{shipment.receiver}</span>
+                  <span className="text-gray-900">{farmer.CBC}</span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className="text-gray-900">${farmer.Name}</span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className="text-gray-900">
-                    {shipment.pickupTime ? convertTime(shipment.pickupTime) : "-"}
+                    {farmer.Date_Created ? convertTime(farmer.Date_Created) : "-"}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="text-gray-900">{shipment.distance} Km</span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="text-gray-900">${shipment.price}</span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`text-${shipment.isPaid ? "green-600" : "red-600"}`}>
-                    {shipment.isPaid ? "Paid" : "Not Paid"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`text-${shipment.status.toLowerCase() === "complete" ? "green-600" : "yellow-600"}`}>
-                    {shipment.status}
-                  </span>
+                  <span className="text-gray-900">{farmer.location}</span>
                 </td>
               </tr>
             ))}
@@ -96,4 +84,4 @@ const ShipmentTable = ({ setCreateShipmentModel }) => {
   );
 };
 
-export default ShipmentTable;
+export default FarmerTable;

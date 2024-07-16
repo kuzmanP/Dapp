@@ -118,6 +118,4 @@ contract Tracking {
     {
         return tyepShipments;
     }
-
-   
 }

@@ -155,7 +155,7 @@ export const TrackingProvider = ({ children }) => {
       const contract = fetchContract(signer);
       const transactionHashID = ethers.utils.id(contract.address + receiver + pickupTime);
       const Status = "Complete"
-      const isPaid =true
+      const isPaid = true
 
       console.log(signer)
       console.log(provider)
@@ -183,28 +183,86 @@ export const TrackingProvider = ({ children }) => {
       };
       try {
         console.log("Hi")
-        const {data} = await axios.post("/api/shipments",body)
+        const { data } = await axios.post("/api/shipments", body)
         console.log("Hello")
-      console.log(data);
+        console.log(data);
       } catch (error) {
         console.log(error)
       }
-      
+
       //getallShipmentDB()
-      
+
       location.reload();
     } catch (error) {
       console.log("Something went wrong", error);
     }
 
-   
+
   };
 
-  
+  //Farmer
+  const createFarmerCBC = async (items) => {
+    console.log(items);
+    const { CBC, Name, Date_Created, location } = items;
+
+    try {
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = fetchContract(signer);
+      console.log(signer)
+      console.log(provider)
+      console.log(contract)
+      const createItem = await contract.createFarmerCBC(
+        CBC,
+        Name,
+        new Date(Date_Created).getTime(),
+        location
+      );
+      await createItem.wait();
+      console.log(createItem);
+
+      const body = {
+        CBC: CBC,
+        Name: Name,
+        Date_Created: Date_Created,
+        location: location
+      };
+      try {
+        console.log("Hi")
+        const { data } = await axios.post("/api/farmers", body)
+        console.log("Hello")
+        console.log(data);
+      } catch (error) {
+        console.log(error)
+      }
+
+      //getallShipmentDB()
+
+      location.reload();
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
+
+
+  };
+
+
   const getallShipmentDB = async () => {
     try {
       console.log("Hi")
-      const {data} = await axios.get("/api/shipments")
+      const { data } = await axios.get("/api/shipments")
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const getallFarmersDB = async () => {
+    try {
+      console.log("Hi")
+      const { data } = await axios.get("/api/farmers")
       return data;
     } catch (error) {
       console.log(error)
@@ -392,6 +450,8 @@ export const TrackingProvider = ({ children }) => {
         getShipment,
         startShipment,
         getShipmentsCount,
+        createFarmerCBC,
+        getallFarmersDB,
         DappName,
         currentUser,
       }}

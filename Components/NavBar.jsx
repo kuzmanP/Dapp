@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-
+import Link from 'next/link';
 import { TrackingContext } from "../Conetxt/TrackingContext";
 import { Nav1, Nav2, Nav3 } from "../Components/index";
 export default () => {
@@ -7,10 +7,10 @@ export default () => {
   const { currentUser, connectWallet } = useContext(TrackingContext);
 
   const navigation = [
-    { title: "Home ", path: "#" },
-    { title: "Services", path: "#" },
-    { title: "Contact Us", path: "#" },
-   
+    { title: "Home ", path: "/" },
+    { title: "Farmer", path: "#" },
+    { title: "LBC", path: "#" },
+
   ];
 
   useEffect(() => {
@@ -23,8 +23,8 @@ export default () => {
   return (
     <nav
       className={`bg-white pb-5 md:text-sm ${state
-          ? "shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0"
-          : ""
+        ? "shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0"
+        : ""
         }`}
     >
       <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
