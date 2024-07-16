@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-
 //INTERNAL IMPORT
 import { Footer, Banner, NavBar } from "../Components";
 import { TrackingProvider } from "../Conetxt/TrackingContext";

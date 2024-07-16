@@ -201,9 +201,9 @@ export const TrackingProvider = ({ children }) => {
   };
 
   //Farmer
-  const createFarmerCBC = async (items) => {
+  const registerFarmer = async (items) => {
     console.log(items);
-    const { CBC, Name, Date_Created, location } = items;
+    const { name, dateCreated, location, farmerAddress, cocoaYield } = items;
 
     try {
       const web3Modal = new Web3Modal();
@@ -214,20 +214,24 @@ export const TrackingProvider = ({ children }) => {
       console.log(signer)
       console.log(provider)
       console.log(contract)
-      const createItem = await contract.createFarmerCBC(
-        CBC,
-        Name,
-        new Date(Date_Created).getTime(),
+      const createItem = await contract.registerFarmer(
+        name,
+        farmerAddress,
+        location,
+        cocoaYield,
+        new Date(dateCreated).getTime(),
         location
       );
+
       await createItem.wait();
       console.log(createItem);
 
       const body = {
-        CBC: CBC,
-        Name: Name,
-        Date_Created: Date_Created,
-        location: location
+        Name: name,
+        Date_Created: dateCreated,
+        location: location,
+        address: farmerAddress,
+        cocoaYield: cocoaYield
       };
       try {
         console.log("Hi")
@@ -261,7 +265,6 @@ export const TrackingProvider = ({ children }) => {
 
   const getallFarmersDB = async () => {
     try {
-      console.log("Hi")
       const { data } = await axios.get("/api/farmers")
       return data;
     } catch (error) {
@@ -450,7 +453,7 @@ export const TrackingProvider = ({ children }) => {
         getShipment,
         startShipment,
         getShipmentsCount,
-        createFarmerCBC,
+        registerFarmer,
         getallFarmersDB,
         DappName,
         currentUser,

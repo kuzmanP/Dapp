@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 //INTERNAL IMPORT
 import {
@@ -17,7 +17,7 @@ const Index = () => {
   const {
     currentUser,
     createShipment,
-    createFarmerCBC,
+    registerFarmer,
     getAllShipment,
     completeShipment,
     getShipment,
@@ -27,7 +27,7 @@ const Index = () => {
 
   //STATE VARIABLE
   const [createShipmentModel, setCreateShipmentModel] = useState(false);
-  const [createFarmerCBCModel, setcreateFarmerCBCModel] = useState(false);
+  const [registerFarmerModel, setRegisterFarmerModel] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [startModal, setStartModal] = useState(false);
   const [completeModal, setCompleteModal] = useState(false);
@@ -60,9 +60,9 @@ const Index = () => {
         setCreateShipmentModel={setCreateShipmentModel}
       />
       <FormFarmer
-        createShipmentModel={createFarmerCBCModel}
-        createFarmerCBC={createFarmerCBC}
-        setcreateFarmerCBCModel={setcreateFarmerCBCModel}
+        registerFarmerModel={registerFarmerModel}
+        registerFarmer={registerFarmer}
+        setRegisterFarmerModel={setRegisterFarmerModel}
       />
       <Profile
         openProfile={openProfile}

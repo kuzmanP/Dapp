@@ -10,12 +10,12 @@ import { TrackingContext } from "../Conetxt/TrackingContext";
 
 const farmerPage = () => {
     const {
-        createFarmerCBC,
+        registerFarmer,
         getallFarmersDB,
     } = useContext(TrackingContext);
 
     //STATE VARIABLE
-    const [createFarmerCBCModel, setcreateFarmerCBCModel] = useState(false);
+    const [registerFarmerModel, setRegisterFarmerModel] = useState(false);
     //DATA STATE VARIABLE
     const [allFarmersdata, setallFarmersdata] = useState([]);
 
@@ -28,12 +28,12 @@ const farmerPage = () => {
     return (
         <>
             <FormFarmer
-                createShipmentModel={createFarmerCBCModel}
-                createFarmerCBC={createFarmerCBC}
-                setcreateFarmerCBCModel={setcreateFarmerCBCModel}
+                registerFarmerModel={registerFarmerModel}
+                registerFarmer={registerFarmer}
+                setRegisterFarmerModel={setRegisterFarmerModel}
             />
             <FarmerTable
-                setcreateFarmerCBCModel={setcreateFarmerCBCModel}
+                setRegisterFarmerModel={setRegisterFarmerModel}
                 allFarmersdata={allFarmersdata}
             />
         </>

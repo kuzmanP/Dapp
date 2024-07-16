@@ -8,8 +8,8 @@ export default () => {
 
   const navigation = [
     { title: "Home ", path: "/" },
-    { title: "Farmer", path: "#" },
-    { title: "LBC", path: "#" },
+    { title: "Farmer", path: "/farmerPage" },
+    { title: "LBC", path: "/lbc" },
 
   ];
 
@@ -54,13 +54,24 @@ export default () => {
             {navigation.map((item, idx) => {
               return (
                 <li key={idx} className="text-gray-700 hover:text-gray-900">
+                  <Link href={item.path}>
+                    <p>{item.title}</p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          {/* <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+            {navigation.map((item, idx) => {
+              return (
+                <li key={idx} className="text-gray-700 hover:text-gray-900">
                   <a href={item.path} className="block">
                     {item.title}
                   </a>
                 </li>
               );
             })}
-          </ul>
+          </ul> */}
           <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
             {currentUser ? (
               <p className="flex items-center justify-center gap-x-1 py-2 px-4 text-[#f59e0b] font-medium bg-[#422006]  hover:bg-[#341402] active:bg-[#341402] rounded-full md:inline-flex">
