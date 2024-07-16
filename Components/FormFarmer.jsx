@@ -56,7 +56,7 @@ export default ({
               <div className="relative mt-3">
                 <input
                   type="text"
-                  placeholder="Receiver"
+                  placeholder="CBC"
                   className="w-full pl-5 pr-3 py-2 text-gray-700 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                   onChange={(e) =>
                     setFarmerCBC({
@@ -69,21 +69,8 @@ export default ({
               <div className="relative mt-3">
                 <input
                   type="date"
-                  placeholder="PickupTime"
+                  placeholder="Date"
                   className="w-full pl-5 pr-3 py-2 text-gray-700 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
-                  onChange={(e) =>
-                    setFarmerCBC({
-                      ...farmer,
-                      Name: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="relative mt-3">
-                <input
-                  type="text"
-                  placeholder="Distance"
-                  className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                   onChange={(e) =>
                     setFarmerCBC({
                       ...farmer,
@@ -95,7 +82,20 @@ export default ({
               <div className="relative mt-3">
                 <input
                   type="text"
-                  placeholder="Price"
+                  placeholder="Name"
+                  className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
+                  onChange={(e) =>
+                    setFarmerCBC({
+                      ...farmer,
+                      Name: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="relative mt-3">
+                <input
+                  type="text"
+                  placeholder="Location"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                   onChange={(e) =>
                     setFarmerCBC({
