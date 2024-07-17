@@ -24,14 +24,14 @@ export default ({
     <div className="fixed inset-0 z-10 overflow-y-auto">
       <div
         className="fixed inset-0 w-full h-full bg-black opacity-40"
-        onClick={() => setRegisterFarmerModel(true)}
+        onClick={() => setRegisterFarmerModel(false)}
       ></div>
       <div className="flex items-center min-h-screen px-4 py-8">
         <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
           <div className="flex justify-end">
             <button
               className="p-2 text-gray-400 rounded-md hover:bg-gray-100"
-              onClick={() => setRegisterFarmerModel(true)}
+              onClick={() => setRegisterFarmerModel(false)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
