@@ -70,7 +70,7 @@ const FarmerTable = ({ setRegisterFarmerModel }) => {
                                     <span className="text-gray-900">{farmer.Name}</span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <span className="text-gray-900">{farmer.farmerAddress}</span>
+                                    <span className="text-gray-900">{farmer.address}</span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <span className="text-gray-900">{farmer.location}</span>

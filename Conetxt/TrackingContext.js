@@ -218,7 +218,7 @@ export const TrackingProvider = ({ children }) => {
       const provider = new ethers.providers.Web3Provider(connection);
       const signer = provider.getSigner();
       const contract = fetchFarmerContract(signer);
-      const farmerAddress = contract.address;
+      const farmerAddress = ethers.utils.id(contract.address);
       console.log(signer)
       console.log(provider)
       console.log(contract)
