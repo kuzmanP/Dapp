@@ -203,7 +203,7 @@ export const TrackingProvider = ({ children }) => {
   //Farmer
   const registerFarmer = async (items) => {
     console.log(items);
-    const { name, dateCreated, location, farmerAddress, cocoaYield } = items;
+    const { name, dateCreated, location, cocoaYield } = items;
 
     try {
       const web3Modal = new Web3Modal();
@@ -211,12 +211,12 @@ export const TrackingProvider = ({ children }) => {
       const provider = new ethers.providers.Web3Provider(connection);
       const signer = provider.getSigner();
       const contract = fetchContract(signer);
+      const farmerAddress = ethers.utils.id(contract.address);
       console.log(signer)
       console.log(provider)
       console.log(contract)
       const createItem = await contract.registerFarmer(
         name,
-        farmerAddress,
         location,
         cocoaYield,
         new Date(dateCreated).getTime(),
@@ -246,7 +246,7 @@ export const TrackingProvider = ({ children }) => {
 
       location.reload();
     } catch (error) {
-      console.log("Something went wrong", error);
+      console.log("Something went wrong Farmer", error);
     }
 
 
