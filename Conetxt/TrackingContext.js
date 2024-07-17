@@ -23,7 +23,7 @@ import tracking from "../Conetxt/Tracking.json";
 import farmer from "../Conetxt/FarmerRegistry.json"
 //HARDHAT ADDRESS
 const ContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const FarmerContractAddress = "0xe7f1725E7734CE288F8367e1Bb";
+const FarmerContractAddress = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
 //POLYGON ADDRESS
 // const ContractAddress = "0xbeEed8435ee819851f443Ae302E9A1c138e3C24c";
 const ContractABI = tracking.abi;
@@ -210,7 +210,7 @@ export const TrackingProvider = ({ children }) => {
   //Farmer
   const registerFarmer = async (items) => {
     console.log(items);
-    const { name, dateCreated, location, cocoaYield } = items;
+    const { _owner, name, dateCreated, location, cocoaYield } = items;
 
     try {
       const web3Modal = new Web3Modal();
@@ -218,16 +218,19 @@ export const TrackingProvider = ({ children }) => {
       const provider = new ethers.providers.Web3Provider(connection);
       const signer = provider.getSigner();
       const contract = fetchFarmerContract(signer);
-      const farmerAddress = ethers.utils.id(contract.address);
+      const farmerAddress = contract.address;
       console.log(signer)
       console.log(provider)
       console.log(contract)
+
+      console.log(contract.interface.fragments); // This will print the ABI of the contract
+      console.log(contract.address); // This will print the contract address
       const createItem = await contract.registerFarmer(
         name,
-        farmerAddress,
+        location,
         cocoaYield,
         new Date(dateCreated).getTime(),
-        location
+
       );
 
       await createItem.wait();
@@ -235,10 +238,10 @@ export const TrackingProvider = ({ children }) => {
 
       const body = {
         Name: name,
-        Date_Created: dateCreated,
         location: location,
         address: farmerAddress,
-        cocoaYield: cocoaYield
+        cocoaYield: cocoaYield,
+        Date_Created: dateCreated,
       };
       try {
         console.log("Hi")
@@ -249,9 +252,6 @@ export const TrackingProvider = ({ children }) => {
         console.log(error)
       }
 
-      //getallShipmentDB()
-
-      location.reload();
     } catch (error) {
       console.log("Something went wrong Farmer", error);
     }
