@@ -259,6 +259,56 @@ export const TrackingProvider = ({ children }) => {
 
   };
 
+  //LBC
+  const registerLBC = async (items) => {
+    console.log(items);
+    const { name, dateCreated, location } = items;
+
+    try {
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = fetchFarmerContract(signer);
+      const lbcAddress = ethers.utils.id(contract.address);
+      console.log(signer)
+      console.log(provider)
+      console.log(contract)
+
+      console.log(contract.interface.fragments); // This will print the ABI of the contract
+      console.log(contract.address); // This will print the contract address
+      const createItem = await contract.registerLBC(
+        name,
+        location,
+        new Date(dateCreated).getTime(),
+
+      );
+
+      await createItem.wait();
+      console.log(createItem);
+
+      const body = {
+        Name: name,
+        location: location,
+        address: lbcAddress,
+        Date_Created: dateCreated,
+      };
+      try {
+        console.log("Hi")
+        const { data } = await axios.post("/api/lbc", body)
+        console.log("Hello")
+        console.log(data);
+      } catch (error) {
+        console.log(error)
+      }
+
+    } catch (error) {
+      console.log("Something went wrong LBC", error);
+    }
+
+
+  };
+
 
   const getallShipmentDB = async () => {
     try {
@@ -273,6 +323,15 @@ export const TrackingProvider = ({ children }) => {
   const getallFarmersDB = async () => {
     try {
       const { data } = await axios.get("/api/farmers")
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const getallLBCDB = async () => {
+    try {
+      const { data } = await axios.get("/api/lbc")
       return data;
     } catch (error) {
       console.log(error)
@@ -461,7 +520,9 @@ export const TrackingProvider = ({ children }) => {
         startShipment,
         getShipmentsCount,
         registerFarmer,
+        registerLBC,
         getallFarmersDB,
+        getallLBCDB,
         DappName,
         currentUser,
       }}

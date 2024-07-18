@@ -5,6 +5,7 @@ import {
   Table,
   Form,
   FormFarmer,
+  FormLBC,
   Services,
   Profile,
   CompleteShipment,
@@ -18,6 +19,7 @@ const Index = () => {
     currentUser,
     createShipment,
     registerFarmer,
+    registerLBC,
     getAllShipment,
     completeShipment,
     getShipment,
@@ -28,6 +30,7 @@ const Index = () => {
   //STATE VARIABLE
   const [createShipmentModel, setCreateShipmentModel] = useState(false);
   const [registerFarmerModel, setRegisterFarmerModel] = useState(false);
+  const [registerLBCModel, setRegisterLBCModel] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [startModal, setStartModal] = useState(false);
   const [completeModal, setCompleteModal] = useState(false);
@@ -63,6 +66,11 @@ const Index = () => {
         registerFarmerModel={registerFarmerModel}
         registerFarmer={registerFarmer}
         setRegisterFarmerModel={setRegisterFarmerModel}
+      />
+      <FormLBC
+        registerLBCModel={registerLBCModel}
+        registerLBC={registerLBC}
+        setRegisterLBCModel={setRegisterLBCModel}
       />
       <Profile
         openProfile={openProfile}

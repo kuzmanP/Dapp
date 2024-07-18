@@ -9,7 +9,7 @@ export default () => {
   const navigation = [
     { title: "Home ", path: "/" },
     { title: "Farmer", path: "/farmerPage" },
-    { title: "LBC", path: "/lbc" },
+    { title: "LBC", path: "/lbcPage" },
 
   ];
 

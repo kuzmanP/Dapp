@@ -3,7 +3,9 @@ import Table from "./Table";
 import NavBar from "./NavBar";
 import Form from "./Form";
 import FormFarmer from "./FormFarmer";
+import FormLBC from "./FormLBC";
 import FarmerTable from "./FarmerTable";
+import LBCTable from "./LBCTable";
 import Services from "./Services";
 import Profile from "./Profile";
 import GetShipment from "./GetShipment";
@@ -25,6 +27,8 @@ export {
     Form,
     FarmerTable,
     FormFarmer,
+    FormLBC,
+    LBCTable,
     Services,
     Profile,
     GetShipment,
