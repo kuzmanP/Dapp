@@ -66,13 +66,13 @@ const LBCTable = ({ setRegisterLBCModel }) => {
                             <tr key={lbcs._id} className="hover:bg-gray-100">
 
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <span className="text-gray-900">{lbcs.name}</span>
+                                    <span className="text-gray-900">{lbcs.Name}</span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <span className="text-gray-900">{lbcs.location}</span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <span className="text-gray-900">{lbcs.lbcAddress}</span>
+                                    <span className="text-gray-900">{lbcs.address}</span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <span className="text-gray-900">

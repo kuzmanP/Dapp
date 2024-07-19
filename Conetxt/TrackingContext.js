@@ -21,13 +21,16 @@ import axios, { Axios } from 'axios';
 //INTERNAL IMPORT
 import tracking from "../Conetxt/Tracking.json";
 import farmer from "../Conetxt/FarmerRegistry.json"
+import lbc from "../Conetxt/LBCRegistry.json"
 //HARDHAT ADDRESS
 const ContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 const FarmerContractAddress = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
+const LBCContractAddress = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
 //POLYGON ADDRESS
 // const ContractAddress = "0xbeEed8435ee819851f443Ae302E9A1c138e3C24c";
 const ContractABI = tracking.abi;
 const FarmerContractABI = farmer.abi;
+const LBCContractABI = lbc.abi;
 
 //---FETCHING SMART CONTRACT
 const fetchContract = (signerOrProvider) =>
@@ -36,6 +39,10 @@ const fetchContract = (signerOrProvider) =>
 
 const fetchFarmerContract = (signerOrProvider) =>
   new ethers.Contract(FarmerContractAddress, FarmerContractABI, signerOrProvider);
+
+
+const fetchLBCContract = (signerOrProvider) =>
+  new ethers.Contract(LBCContractAddress, LBCContractABI, signerOrProvider);
 
 //NETWORK----
 
@@ -269,7 +276,7 @@ export const TrackingProvider = ({ children }) => {
       const connection = await web3Modal.connect();
       const provider = new ethers.providers.Web3Provider(connection);
       const signer = provider.getSigner();
-      const contract = fetchFarmerContract(signer);
+      const contract = fetchLBCContract(signer);
       const lbcAddress = ethers.utils.id(contract.address);
       console.log(signer)
       console.log(provider)
