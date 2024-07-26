@@ -36,7 +36,7 @@ const ContractABI = tracking.abi;
 const FarmerContractABI = farmer.abi;
 const LBCContractABI = lbc.abi;
 const FarmerProductContractABI = farmerProduct.abi;
-const LBCProductContractABI = farmerProduct.abi;
+const LBCProductContractABI = lbcProduct.abi;
 //---FETCHING SMART CONTRACT
 const fetchContract = (signerOrProvider) =>
   new ethers.Contract(ContractAddress, ContractABI, signerOrProvider);
@@ -444,6 +444,27 @@ export const TrackingProvider = ({ children }) => {
       console.log(error)
     }
   };
+  const getallSingleShipmentDB = async (transactionHash) => {
+    try {
+      console.log("Fetching shipment with transactionHash:", transactionHash);
+      const { data } = await axios.get(`/api/shipments?transactionHash=${transactionHash}`);
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error fetching shipment data");
+    }
+  };
+  
+
+  const countShipmentDB = async () => {
+    try {
+      console.log("Hi")
+      const { data } = await axios.get("/api/shipments")
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   const getallFarmersDB = async () => {
     try {
@@ -675,10 +696,12 @@ export const TrackingProvider = ({ children }) => {
         createShipment,
         getAllShipment,
         getallShipmentDB,
+        getallSingleShipmentDB,
         completeShipment,
         getShipment,
         startShipment,
         getShipmentsCount,
+        countShipmentDB,
         registerFarmer,
         registerLBC,
         createFarmerProduct,
