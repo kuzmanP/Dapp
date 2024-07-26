@@ -7,6 +7,7 @@ import {
   FormFarmer,
   FormLBC,
   FarmerProductForm,
+  LBCProductForm,
   Services,
   Profile,
   CompleteShipment,
@@ -20,6 +21,7 @@ const Index = () => {
     currentUser,
     createShipment,
     createFarmerProduct,
+    createLBCProduct,
     registerFarmer,
     registerLBC,
     getAllShipment,
@@ -32,6 +34,7 @@ const Index = () => {
   //STATE VARIABLE
   const [createShipmentModel, setCreateShipmentModel] = useState(false);
   const [createFarmerProductModel, setCreateFarmerProductModel] = useState(false);
+  const [createLBCProductModel, setCreateLBCProductModel] = useState(false);
   const [registerFarmerModel, setRegisterFarmerModel] = useState(false);
   const [registerLBCModel, setRegisterLBCModel] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
@@ -69,6 +72,11 @@ const Index = () => {
         createFarmerProductModel={createFarmerProductModel}
         createFarmerProduct={createFarmerProduct}
         setCreateFarmerProductModel={setCreateFarmerProductModel}
+      />
+      <LBCProductForm
+        createLBCProductModel={createLBCProductModel}
+        createLBCProduct={createLBCProduct}
+        setCreateFarmerLBCModel={setCreateLBCProductModel}
       />
       <FormFarmer
         registerFarmerModel={registerFarmerModel}

@@ -8,12 +8,18 @@ contract LBCRegistry {
         uint256 dateCreated;
     }
 
+    mapping(address => bool) public registeredLBC;
+
     mapping(address => LBC[]) public lbcs;
     uint256 public lbcsCount;
 
     event LBCCreated(string _name, string _location, uint256 _dateCreated);
 
     LBC[] public typeLBC;
+
+    function isLBCRegistered(address _lbcs) public view returns (bool) {
+        return registeredLBC[_lbcs];
+    }
 
     function registerLBC(
         string memory _name,

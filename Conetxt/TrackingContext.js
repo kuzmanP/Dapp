@@ -23,17 +23,20 @@ import tracking from "../Conetxt/Tracking.json";
 import farmer from "../Conetxt/FarmerRegistry.json"
 import lbc from "../Conetxt/LBCRegistry.json"
 import farmerProduct from "../Conetxt/FarmerProductPage.json"
+import lbcProduct from "../Conetxt/LBCProductPage.json"
 //HARDHAT ADDRESS
 const ContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 const FarmerContractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 const LBCContractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
 const FarmerProductAddress = "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853";
+const LBCProductAddress = "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0";
 //POLYGON ADDRESS
 // const ContractAddress = "0xbeEed8435ee819851f443Ae302E9A1c138e3C24c";
 const ContractABI = tracking.abi;
 const FarmerContractABI = farmer.abi;
 const LBCContractABI = lbc.abi;
 const FarmerProductContractABI = farmerProduct.abi;
+const LBCProductContractABI = farmerProduct.abi;
 //---FETCHING SMART CONTRACT
 const fetchContract = (signerOrProvider) =>
   new ethers.Contract(ContractAddress, ContractABI, signerOrProvider);
@@ -48,6 +51,11 @@ const fetchLBCContract = (signerOrProvider) =>
 
 const fetchFarmerProductContract = (signerOrProvider) =>
   new ethers.Contract(FarmerProductAddress, FarmerProductContractABI, signerOrProvider);
+
+
+
+const fetchLBCProductContract = (signerOrProvider) =>
+  new ethers.Contract(LBCProductAddress, LBCProductContractABI, signerOrProvider);
 
 //NETWORK----
 
@@ -373,6 +381,58 @@ export const TrackingProvider = ({ children }) => {
 
   };
 
+  //LBC Products
+  const createLBCProduct = async (items) => {
+    console.log(items);
+    const { farmer, location, quantity, price, date } = items;
+
+    try {
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = fetchLBCProductContract(signer);
+      const lbcProductAddress = ethers.utils.id(contract.address);
+      console.log(signer)
+      console.log(provider)
+      console.log(contract)
+
+      console.log(contract.interface.fragments); // This will print the ABI of the contract
+      console.log(contract.address); // This will print the contract address
+      const createItem = await contract.addProduct(
+        location,
+        quantity,
+        price,
+        new Date(date).getTime(),
+
+      );
+
+      await createItem.wait();
+      console.log(createItem);
+
+      const body = {
+        lbcAddress: lbcProductAddress,
+        farmerAddress: farmer,
+        location: location,
+        quantity: quantity,
+        price: price,
+        date: date,
+      };
+      try {
+        console.log(body)
+        const { data } = await axios.post("/api/lbcProduct", body)
+        console.log("Hello")
+        console.log(data);
+      } catch (error) {
+        console.log(error)
+      }
+
+    } catch (error) {
+      console.log("Something went wrong LBC Product", error);
+    }
+
+
+  };
 
 
   const getallShipmentDB = async () => {
@@ -406,6 +466,15 @@ export const TrackingProvider = ({ children }) => {
   const getallFarmerProductDB = async () => {
     try {
       const { data } = await axios.get("/api/farmerProduct")
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const getallLBCProductDB = async () => {
+    try {
+      const { data } = await axios.get("/api/lbcProduct")
       return data;
     } catch (error) {
       console.log(error)
@@ -613,7 +682,9 @@ export const TrackingProvider = ({ children }) => {
         registerFarmer,
         registerLBC,
         createFarmerProduct,
+        createLBCProduct,
         getallFarmerProductDB,
+        getallLBCProductDB,
         getallFarmersDB,
         getallLBCDB,
         DappName,

@@ -5,9 +5,11 @@ import Form from "./Form";
 import FormFarmer from "./FormFarmer";
 import FormLBC from "./FormLBC";
 import FarmerProductForm from "./FarmerProductForm";
+import LBCProductForm from "./LBCProductForm";
 import FarmerTable from "./FarmerTable";
 import LBCTable from "./LBCTable";
 import FarmerProductTable from "./FarmerProductTable";
+import LBCProductTable from "./LBCProductTable";
 import Services from "./Services";
 import Profile from "./Profile";
 import GetShipment from "./GetShipment";
@@ -29,9 +31,11 @@ export {
     Form,
     FarmerTable,
     FarmerProductTable,
+    LBCProductTable,
     FormFarmer,
     FormLBC,
     FarmerProductForm,
+    LBCProductForm,
     LBCTable,
     Services,
     Profile,
