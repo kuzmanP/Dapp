@@ -458,13 +458,15 @@ export const TrackingProvider = ({ children }) => {
 
   const countShipmentDB = async () => {
     try {
-      console.log("Hi")
-      const { data } = await axios.get("/api/shipments")
-      return data;
+      console.log("Counting shipments");
+      const { data } = await axios.get("/api/shipments?count=true");
+      return data.count;
     } catch (error) {
-      console.log(error)
+      console.error("Error counting shipments:", error);
+      throw new Error("Error counting shipments");
     }
   };
+  
 
   const getallFarmersDB = async () => {
     try {

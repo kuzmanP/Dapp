@@ -6,6 +6,7 @@ export default ({
   setCompleteModal,
   setGetModel,
   setStartModal,
+  // setTotalTransport
 }) => {
   const services = [
     {
@@ -27,7 +28,7 @@ export default ({
       title: "Send Product",
     },
   ];
- 
+
 
   const openModelBox = (text) => {
     console.log("Text: ", text);
@@ -40,6 +41,9 @@ export default ({
     } else if (text === 4) {
       setOpenProfile(true);
     }
+    // else if (text === 5) {
+    //   setTotalTransport(true);
+    // }
   };
   return (
     <section className="py-0 pb-14">
@@ -47,14 +51,14 @@ export default ({
         <div className="mt-12">
           <ul className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
             {services.map(({ title }, i) => (
-            <li key={i}>
-              <div
-                onClick={() => openModelBox(i + 1)}
-                className="flex justify-center items-center w-full h-60 sm:h-52 md:h-56 bg-[#422006] text-[#f59e0b] rounded-2xl cursor-pointer text-center shadow-md hover:bg-[#341402] transition duration-300"
-              >
-                <p className="mb-0 text-2xl font-bold whitespace-pre">{title.toUpperCase()}</p>
-              </div>
-            </li>
+              <li key={i}>
+                <div
+                  onClick={() => openModelBox(i + 1)}
+                  className="flex justify-center items-center w-full h-60 sm:h-52 md:h-56 bg-[#422006] text-[#f59e0b] rounded-2xl cursor-pointer text-center shadow-md hover:bg-[#341402] transition duration-300"
+                >
+                  <p className="mb-0 text-2xl font-bold whitespace-pre">{title.toUpperCase()}</p>
+                </div>
+              </li>
             ))}
           </ul>
         </div>
