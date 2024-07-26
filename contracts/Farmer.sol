@@ -9,6 +9,8 @@ contract FarmerRegistry {
         uint256 dateCreated;
     }
 
+    mapping(address => bool) public registeredFarmers;
+
     mapping(address => Farmer[]) public farmers;
     uint256 public farmerCount;
 
@@ -21,32 +23,23 @@ contract FarmerRegistry {
 
     Farmer[] public typeFarmers;
 
+    function isFarmerRegistered(address _farmer) public view returns (bool) {
+        return registeredFarmers[_farmer];
+    }
+
     function registerFarmer(
         string memory _name,
         string memory _location,
         uint256 _yield,
         uint256 _dateCreated
     ) public {
-        Farmer memory farmer = Farmer(
-            
-            _name,
-            _location,
-            _yield,
-            _dateCreated
-        );
+        Farmer memory farmer = Farmer(_name, _location, _yield, _dateCreated);
 
         farmers[msg.sender].push(farmer);
         farmerCount++;
 
-        typeFarmers.push(
-            Farmer( _name, _location, _yield, _dateCreated)
-        );
+        typeFarmers.push(Farmer(_name, _location, _yield, _dateCreated));
 
-        emit FarmerCreated(
-            _name,
-            _location,
-            _yield,
-            _dateCreated
-        );
+        emit FarmerCreated(_name, _location, _yield, _dateCreated);
     }
 }
