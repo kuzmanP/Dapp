@@ -21,5 +21,13 @@ export default async (req, res) => {
             console.log(error)
             res.status(500).json({ error: error.message });
         }
+    } else if (req.query.count) {
+        try {
+            await connectToDatabase();
+            let count = await Farmer.collection.countDocuments({});
+            res.status(200).json({ count });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
     }
 };

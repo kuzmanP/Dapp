@@ -10,22 +10,22 @@ export default ({
 }) => {
   const services = [
     {
-      title: "Complete Transport",
+      title: "Total LBC", //complete
     },
     {
       title: "Get Details",
     },
+    // {
+    //   title: "Total Farmer", //start
+    // }, 
+    // {
+    //   title: "User",
+    // },
+    // {
+    //   title: "Total Transport",
+    // },
     {
-      title: "Start Transport",
-    },
-    {
-      title: "User",
-    },
-    {
-      title: "Total Transport",
-    },
-    {
-      title: "Send Product",
+      title: "Total Farmers", //send
     },
   ];
 
