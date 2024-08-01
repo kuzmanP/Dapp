@@ -6,7 +6,7 @@ import { Nav1, Nav2, Nav3 } from "../Components/index";
 
 export default () => {
   const [state, setState] = useState(false);
-  const { currentUser, connectWallet, connectFarmerWallet } = useContext(TrackingContext);
+  const { currentUser, connectWallet, connectFarmerWallet, connectQCCWallet } = useContext(TrackingContext);
   const router = useRouter();
   const { pathname } = router;
 
@@ -16,6 +16,8 @@ export default () => {
     { title: "LBC", path: "/lbcPage" },
     { title: "Farmer Product Page", path: "/farmerProductPage" },
     { title: "LBC Product Page", path: "/lbcProductPage" },
+    { title: "QCC Page", path: "/qccPage" },
+
   ];
 
   useEffect(() => {
@@ -89,6 +91,14 @@ export default () => {
                 ) : pathname === "/lbcProductPage" ? (
                   <button
                     onClick={() => connectFarmerWallet()}
+                    className="flex items-center justify-center gap-x-1 py-2 px-4 text-[#f59e0b] font-medium bg-[#422006] hover:bg-[#341402] active:bg-[#341402] rounded-full md:inline-flex"
+                  >
+                    Connect LBC Wallet
+                    <Nav3 />
+                  </button>
+                ) : pathname === "/qccPage" ? (
+                  <button
+                    onClick={() => connectQCCWallet()}
                     className="flex items-center justify-center gap-x-1 py-2 px-4 text-[#f59e0b] font-medium bg-[#422006] hover:bg-[#341402] active:bg-[#341402] rounded-full md:inline-flex"
                   >
                     Connect LBC Wallet

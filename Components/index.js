@@ -6,10 +6,12 @@ import FormFarmer from "./FormFarmer";
 import FormLBC from "./FormLBC";
 import FarmerProductForm from "./FarmerProductForm";
 import LBCProductForm from "./LBCProductForm";
+import QCCForm from "./QCCForm";
 import FarmerTable from "./FarmerTable";
 import LBCTable from "./LBCTable";
 import FarmerProductTable from "./FarmerProductTable";
 import LBCProductTable from "./LBCProductTable";
+import QCCTable from "./QCCTable";
 import Services from "./Services";
 import Profile from "./Profile";
 import GetShipment from "./GetShipment";
@@ -32,10 +34,12 @@ export {
     FarmerTable,
     FarmerProductTable,
     LBCProductTable,
+    QCCTable,
     FormFarmer,
     FormLBC,
     FarmerProductForm,
     LBCProductForm,
+    QCCForm,
     LBCTable,
     Services,
     Profile,

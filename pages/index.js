@@ -8,6 +8,7 @@ import {
   FormLBC,
   FarmerProductForm,
   LBCProductForm,
+  QCCForm,
   Services,
   Profile,
   CompleteShipment,
@@ -22,6 +23,7 @@ const Index = () => {
     createShipment,
     createFarmerProduct,
     createLBCProduct,
+    createQCC,
     registerFarmer,
     registerLBC,
     getAllShipment,
@@ -35,6 +37,7 @@ const Index = () => {
   const [createShipmentModel, setCreateShipmentModel] = useState(false);
   const [createFarmerProductModel, setCreateFarmerProductModel] = useState(false);
   const [createLBCProductModel, setCreateLBCProductModel] = useState(false);
+  const [createQCCModel, setCreateQCCModel] = useState(false);
   const [registerFarmerModel, setRegisterFarmerModel] = useState(false);
   const [registerLBCModel, setRegisterLBCModel] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
@@ -77,6 +80,11 @@ const Index = () => {
         createLBCProductModel={createLBCProductModel}
         createLBCProduct={createLBCProduct}
         setCreateFarmerLBCModel={setCreateLBCProductModel}
+      />
+      <QCCForm
+        createQCCModel={createQCCModel}
+        createQCC={createQCC}
+        setCreateQCCModel={setCreateQCCModel}
       />
       <FormFarmer
         registerFarmerModel={registerFarmerModel}

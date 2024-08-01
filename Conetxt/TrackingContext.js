@@ -24,12 +24,14 @@ import farmer from "../Conetxt/FarmerRegistry.json"
 import lbc from "../Conetxt/LBCRegistry.json"
 import farmerProduct from "../Conetxt/FarmerProductPage.json"
 import lbcProduct from "../Conetxt/LBCProductPage.json"
+import qccProduct from "../Conetxt/QCCProductPage.json"
 //HARDHAT ADDRESS
 const ContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 const FarmerContractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 const LBCContractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
 const FarmerProductAddress = "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853";
 const LBCProductAddress = "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0";
+const QCCProductAddress = "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e";
 //POLYGON ADDRESS
 // const ContractAddress = "0xbeEed8435ee819851f443Ae302E9A1c138e3C24c";
 const ContractABI = tracking.abi;
@@ -37,6 +39,7 @@ const FarmerContractABI = farmer.abi;
 const LBCContractABI = lbc.abi;
 const FarmerProductContractABI = farmerProduct.abi;
 const LBCProductContractABI = lbcProduct.abi;
+const QCCProductContractABI = qccProduct.abi;
 //---FETCHING SMART CONTRACT
 const fetchContract = (signerOrProvider) =>
   new ethers.Contract(ContractAddress, ContractABI, signerOrProvider);
@@ -56,6 +59,9 @@ const fetchFarmerProductContract = (signerOrProvider) =>
 
 const fetchLBCProductContract = (signerOrProvider) =>
   new ethers.Contract(LBCProductAddress, LBCProductContractABI, signerOrProvider);
+
+const fetchQCCProductContract = (signerOrProvider) =>
+  new ethers.Contract(QCCProductAddress, QCCProductContractABI, signerOrProvider);
 
 //NETWORK----
 
@@ -434,6 +440,62 @@ export const TrackingProvider = ({ children }) => {
 
   };
 
+  //QCC
+  const createQCC = async (items) => {
+    console.log(items);
+    const { batch_id, bean_quality, moisture_level, origin, inspection_date } = items;
+
+    try {
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = fetchQCCProductContract(signer);
+      const qccProductAddress = ethers.utils.id(contract.address);
+      console.log(signer)
+      console.log(provider)
+      console.log(contract)
+
+      console.log(contract.interface.fragments); // This will print the ABI of the contract
+      console.log(contract.address); // This will print the contract address
+      const createItem = await contract.addCocoaQuality(
+        batch_id,
+        bean_quality,
+        moisture_level,
+        origin,
+        new Date(inspection_date).getTime(),
+
+      );
+
+      await createItem.wait();
+      console.log(createItem);
+
+      const body = {
+        QCC: qccProductAddress,
+        batch_id: batch_id,
+        bean_quality: bean_quality,
+        moisture_level: moisture_level,
+        origin: origin,
+        inspection_date: inspection_date,
+      };
+      try {
+        console.log(body)
+        const { data } = await axios.post("/api/qccProduct", body)
+        console.log("Hello")
+        console.log(data);
+      } catch (error) {
+        console.log(error)
+      }
+
+    } catch (error) {
+      console.log("Something went wrong QCC Product", error);
+    }
+
+
+  };
+
+
+
 
   const getallShipmentDB = async () => {
     try {
@@ -503,6 +565,16 @@ export const TrackingProvider = ({ children }) => {
       console.log(error)
     }
   };
+
+  const getallQCCDB = async () => {
+    try {
+      const { data } = await axios.get("/api/qccProduct")
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
 
   const getAllShipment = async () => {
     try {
@@ -667,7 +739,7 @@ export const TrackingProvider = ({ children }) => {
         method: "eth_requestAccounts",
       });
 
-      setCurrentUser(accounts[2]);
+      setCurrentUser(accounts[3]);
     } catch (error) {
       alert("Something want wrong");
       return;
@@ -676,6 +748,22 @@ export const TrackingProvider = ({ children }) => {
 
   //Farmer Wallet
   const connectFarmerWallet = async () => {
+    try {
+      if (!window.ethereum) { alert("Install MetaMask"); return };
+      const network = await handleNetworkSwitch();
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      setCurrentUser(accounts[1]);
+    } catch (error) {
+      alert("Something went wrong");
+      return;
+    }
+  };
+
+  //Farmer Wallet
+  const connectQCCWallet = async () => {
     try {
       if (!window.ethereum) { alert("Install MetaMask"); return };
       const network = await handleNetworkSwitch();
@@ -708,10 +796,13 @@ export const TrackingProvider = ({ children }) => {
         registerLBC,
         createFarmerProduct,
         createLBCProduct,
+        createQCC,
         getallFarmerProductDB,
         getallLBCProductDB,
         getallFarmersDB,
         getallLBCDB,
+        getallQCCDB,
+        connectQCCWallet,
         DappName,
         currentUser,
       }}
