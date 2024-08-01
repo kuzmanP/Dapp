@@ -54,10 +54,11 @@ const ShipmentTable = ({ setCreateShipmentModel }) => {
             <tr>
               <th className="py-3 px-6">Receiver</th>
               <th className="py-3 px-6">Pickup Time</th>
-              <th className="py-3 px-6">Distance</th>
+              <th className="py-3 px-6">Quantity</th>
               <th className="py-3 px-6">Price</th>
               <th className="py-3 px-6">Paid</th>
               <th className="py-3 px-6">Status</th>
+              <th className="py-3 px-6">Location Type</th>
             </tr>
           </thead>
           <tbody className="text-gray-600">
@@ -72,7 +73,7 @@ const ShipmentTable = ({ setCreateShipmentModel }) => {
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="text-gray-900">{shipment.distance} Km</span>
+                  <span className="text-gray-900">{shipment.quantity} </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className="text-gray-900">${shipment.price}</span>
@@ -86,6 +87,9 @@ const ShipmentTable = ({ setCreateShipmentModel }) => {
                   <span className={`text-${shipment.status.toLowerCase() === "complete" ? "green-600" : "yellow-600"}`}>
                     {shipment.status}
                   </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className="text-gray-900">{shipment.locationType}</span>
                 </td>
               </tr>
             ))}

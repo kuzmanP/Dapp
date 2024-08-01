@@ -3,11 +3,12 @@ import mongoose from 'mongoose';
 const shipmentSchema = new mongoose.Schema({
   receiver: { type: String, required: true },
   pickupTime: { type: String, required: true },
-  distance: { type: Number, required: true },
+  quantity: { type: Number, required: true },
   price: { type: Number, required: true },
   transactionHash: { type: String, required: true },
   isPaid: { type: Boolean, required: true },
-  status: { type: String, required: true }
+  status: { type: String, required: true },
+  locationType: { type: String, required: true },
 });
 
 let Shipment;

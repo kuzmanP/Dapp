@@ -172,7 +172,7 @@ export const TrackingProvider = ({ children }) => {
 
   const createShipment = async (items) => {
     console.log(items);
-    const { receiver, pickupTime, distance, price } = items;
+    const { receiver, pickupTime, quantity, price, locationType } = items;
 
     try {
       const web3Modal = new Web3Modal();
@@ -190,23 +190,23 @@ export const TrackingProvider = ({ children }) => {
       const createItem = await contract.createShipment(
         receiver,
         new Date(pickupTime).getTime(),
-        distance,
+        quantity,
         ethers.utils.parseUnits(price, 18),
-        {
-          value: ethers.utils.parseUnits(price, 18),
-        }
+        locationType
       );
+      console.log("Hi 22")
       await createItem.wait();
       console.log(createItem);
-
+      console.log("Hi 33")
       const body = {
         receiver: receiver,
         pickupTime: pickupTime,
-        distance: Number(distance),
+        quantity: Number(quantity),
         price: Number(price),
         transactionHash: transactionHashID,
         isPaid: isPaid,
-        status: Status
+        status: Status,
+        locationType: locationType
       };
       try {
         console.log("Hi")
@@ -454,7 +454,7 @@ export const TrackingProvider = ({ children }) => {
       throw new Error("Error fetching shipment data");
     }
   };
-  
+
 
   const countShipmentDB = async () => {
     try {
@@ -466,7 +466,7 @@ export const TrackingProvider = ({ children }) => {
       throw new Error("Error counting shipments");
     }
   };
-  
+
 
   const getallFarmersDB = async () => {
     try {

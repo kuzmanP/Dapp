@@ -8,8 +8,9 @@ export default ({
   const [shipment, setShipment] = useState({
     receiver: "",
     pickupTime: "",
-    distance: "",
+    quantity: "",
     price: "",
+    locationType: "",
   });
 
   const createItem = async () => {
@@ -82,12 +83,12 @@ export default ({
               <div className="relative mt-3">
                 <input
                   type="text"
-                  placeholder="Distance"
+                  placeholder="Quantity"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                   onChange={(e) =>
                     setShipment({
                       ...shipment,
-                      distance: e.target.value,
+                      quantity: e.target.value,
                     })
                   }
                 />
@@ -106,6 +107,19 @@ export default ({
                 />
               </div>
 
+              <div className="relative mt-3">
+                <input
+                  type="text"
+                  placeholder="Location Type"
+                  className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
+                  onChange={(e) =>
+                    setShipment({
+                      ...shipment,
+                      locationType: e.target.value,
+                    })
+                  }
+                />
+              </div>
               <button
                 onClick={() => createItem()}
                 className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-[#f59e0b] bg-[#492407] hover:bg-[#341402] active:bg-[#341402] rounded-lg ring-offset-2 ring-gray-600 focus:ring-2"
