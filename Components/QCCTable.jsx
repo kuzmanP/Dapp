@@ -67,21 +67,22 @@ const QCCTable = ({ setCreateQCCModel }) => {
                                     <span className="text-gray-900">{qcc.QCC}</span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <span className="text-gray-900">
-                                        {shipment.pickupTime ? convertTime(qcc.batch_id) : "-"}
-                                    </span>
+                                    <span className="text-gray-900">{qcc.batch_id}</span>
                                 </td>
+
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <span className="text-gray-900">{qcc.bean_quality} </span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <span className="text-gray-900">${qcc.moisture_level}</span>
+                                    <span className="text-gray-900">{qcc.moisture_level}</span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <span className="text-gray-900">{qcc.origin}</span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <span className="text-gray-900">{qcc.inspection_date}</span>
+                                    <span className="text-gray-900">
+                                        {qcc.inspection_date ? convertTime(qcc.inspection_date) : "-"}
+                                    </span>
                                 </td>
                             </tr>
                         ))}
