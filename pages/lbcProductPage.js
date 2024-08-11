@@ -31,7 +31,7 @@ const lbcProductPage = () => {
             <LBCProductForm
                 createLBCProductModel={createLBCProductModel}
                 createLBCProduct={createLBCProduct}
-                setCreateFarmerLBCModel={setCreateLBCProductModel}
+                setCreateLBCProductModel={setCreateLBCProductModel}
             />
             <LBCProductTable
                 setCreateLBCProductModel={setCreateLBCProductModel}

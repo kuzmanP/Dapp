@@ -406,6 +406,7 @@ export const TrackingProvider = ({ children }) => {
       console.log(contract.interface.fragments); // This will print the ABI of the contract
       console.log(contract.address); // This will print the contract address
       const createItem = await contract.addProduct(
+        farmer,
         location,
         quantity,
         price,
