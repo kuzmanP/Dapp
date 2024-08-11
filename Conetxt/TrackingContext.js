@@ -405,6 +405,7 @@ export const TrackingProvider = ({ children }) => {
 
       console.log(contract.interface.fragments); // This will print the ABI of the contract
       console.log(contract.address); // This will print the contract address
+      console.log("HHHH")
       const createItem = await contract.addProduct(
         farmer,
         location,
@@ -413,13 +414,12 @@ export const TrackingProvider = ({ children }) => {
         new Date(date).getTime(),
 
       );
-
+      console.log("QQQQ")
       await createItem.wait();
       console.log(createItem);
 
       const body = {
         lbcAddress: lbcProductAddress,
-        farmerAddress: farmer,
         location: location,
         quantity: quantity,
         price: price,
@@ -763,7 +763,7 @@ export const TrackingProvider = ({ children }) => {
     }
   };
 
-  //Farmer Wallet
+  //QCC Wallet
   const connectQCCWallet = async () => {
     try {
       if (!window.ethereum) { alert("Install MetaMask"); return };
@@ -773,6 +773,22 @@ export const TrackingProvider = ({ children }) => {
       });
 
       setCurrentUser(accounts[0]);
+    } catch (error) {
+      alert("Something went wrong");
+      return;
+    }
+  };
+
+  //LBC
+  const connectLBCWallet = async () => {
+    try {
+      if (!window.ethereum) { alert("Install MetaMask"); return };
+      const network = await handleNetworkSwitch();
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      setCurrentUser(accounts[2]);
     } catch (error) {
       alert("Something went wrong");
       return;
@@ -804,6 +820,7 @@ export const TrackingProvider = ({ children }) => {
         getallLBCDB,
         getallQCCDB,
         connectQCCWallet,
+        connectLBCWallet,
         DappName,
         currentUser,
       }}
