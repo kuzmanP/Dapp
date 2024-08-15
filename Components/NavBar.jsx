@@ -104,7 +104,7 @@ export default () => {
                     onClick={() => connectQCCWallet()}
                     className="flex items-center justify-center gap-x-1 py-2 px-4 text-[#f59e0b] font-medium bg-[#422006] hover:bg-[#341402] active:bg-[#341402] rounded-full md:inline-flex"
                   >
-                    Connect LBC Wallet
+                    Connect QCCC Wallet
                     <Nav3 />
                   </button>
                 ) : null}
